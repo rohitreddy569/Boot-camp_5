@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookup for new data",
+				"name": "Lookupforlastprocessingtime",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -32,7 +32,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Lookup for new data",
+						"activity": "Lookupforlastprocessingtime",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -49,7 +49,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT * FROM SourceTable\nWHERE ModifiedDate > '@{activity('GetLastProcessedTime').output.firstRow.LastProcessedTime}'\n",
+						"sqlReaderQuery": {
+							"value": "SELECT * FROM SourceTable\nWHERE ModifiedDate > '@{activity('Lookupforlastprocessingtime').output.firstRow.LastProcessedTime}'\n\n",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -112,10 +115,10 @@
 					"storedProcedureParameters": {
 						"NewLastProcessedTime": {
 							"value": {
-								"value": "utcNow()",
+								"value": "@utcNow()",
 								"type": "Expression"
 							},
-							"type": "DateTime"
+							"type": "Datetime"
 						}
 					}
 				},
