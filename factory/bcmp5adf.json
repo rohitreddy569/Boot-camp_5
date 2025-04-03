@@ -1,0 +1,9 @@
+{
+	"name": "bcmp5adf",
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "caed3722-b54e-4db4-b32d-dcb29e467a4b",
+		"tenantId": "c2b25586-973e-4d75-8d8c-10c7596bfb6d"
+	}
+}
