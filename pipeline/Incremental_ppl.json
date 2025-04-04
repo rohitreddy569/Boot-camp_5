@@ -126,6 +126,62 @@
 					"referenceName": "ls_azuredb",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "WebHook1",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "webhook-channel-aaaap2r644pilc64yxhpdlcgqq@dataengineeri-beu6758.slack.com",
+					"method": "POST",
+					"headers": {
+						"Content-type": "application/azpipelines"
+					},
+					"body": {
+						"text": "Success"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "WebHook2",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "webhook-channel-aaaap2r644pilc64yxhpdlcgqq@dataengineeri-beu6758.slack.com",
+					"method": "POST",
+					"headers": {
+						"Content-type": "application/azpipelines"
+					},
+					"body": {
+						"text": "Failure"
+					},
+					"timeout": "00:10:00"
+				}
 			}
 		],
 		"annotations": []
