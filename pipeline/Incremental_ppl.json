@@ -147,7 +147,7 @@
 					"url": "https://hooks.slack.com/services/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",
 					"method": "POST",
 					"headers": {
-						"content-type": "application/json"
+						"Content-type": "application/json"
 					},
 					"body": {
 						"text": "The data ingestion pipeline has succeeded."
@@ -175,7 +175,7 @@
 					"url": "https://hooks.slack.com/services/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",
 					"method": "POST",
 					"headers": {
-						"content-type": "application/json"
+						"Content-type": "application/json"
 					},
 					"body": {
 						"text": "The data ingestion pipeline has failed."
