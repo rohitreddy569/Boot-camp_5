@@ -126,6 +126,62 @@
 					"referenceName": "ls_azuredb",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Slack notification upon success",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://hooks.slack.com/services/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",
+					"method": "POST",
+					"headers": {
+						"content-type": "application/json"
+					},
+					"body": {
+						"text": "The data ingestion pipeline has succeeded."
+					},
+					"timeout": "00:01:00"
+				}
+			},
+			{
+				"name": "Slack notification upon failure",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://hooks.slack.com/services/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",
+					"method": "POST",
+					"headers": {
+						"content-type": "application/json"
+					},
+					"body": {
+						"text": "The data ingestion pipeline has failed."
+					},
+					"timeout": "00:01:00"
+				}
 			}
 		],
 		"annotations": []
